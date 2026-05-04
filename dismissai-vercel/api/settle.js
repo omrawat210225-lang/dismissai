@@ -36,7 +36,7 @@ Respond ONLY with a valid JSON object with no extra text:
         'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'llama3-8b-8192',
+        model: 'llama-3.3-70b-versatile',
         messages: [{ role: 'user', content: prompt }],
         max_tokens: 1024,
         temperature: 0.7
