@@ -22,29 +22,28 @@ export default async function handler(req, res) {
 Convert this rant into a ${toneDesc} message${recipient ? ` for ${recipient}` : ""}:
 Rant: ${rant}
 
-Respond ONLY with a valid JSON object:
-{
-  "converted": "the rewritten message in the requested tone",
-  "keyPoints": ["key point 1", "key point 2", "key point 3"],
-  "whatYouReallyMean": "1-2 sentences summarising what the person actually wants",
-  "rageLevel": 0-100
-}`;
+Respond ONLY with a valid JSON object with no extra text:
+{"converted":"the rewritten message","keyPoints":["key point 1","key point 2"],"whatYouReallyMean":"1-2 sentences what the person actually wants","rageLevel":75}`;
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
+      },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { maxOutputTokens: 2048 }
+        model: 'llama3-8b-8192',
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 1024,
+        temperature: 0.7
       })
     });
 
     const data = await response.json();
-    if (data.error) throw new Error(data.error.message || 'Gemini API error');
-    const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text ?? '{}';
-    const clean = rawText.replace(/```json|```/g, '').trim();
-    const jsonMatch = clean.match(/\{[\s\S]*\}/);
+    if (data.error) throw new Error(data.error.message || 'Groq API error');
+    const rawText = data.choices?.[0]?.message?.content ?? '{}';
+    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
     const result = jsonMatch ? JSON.parse(jsonMatch[0]) : {};
 
     res.json({
