@@ -1,0 +1,8 @@
+{
+  "name": "dismissai",
+  "version": "1.0.0",
+  "description": "DismissAI - Brutally honest AI for real life situations",
+  "engines": {
+    "node": ">=18"
+  }
+}
