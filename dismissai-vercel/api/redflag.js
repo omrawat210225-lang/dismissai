@@ -38,18 +38,21 @@ Respond ONLY with a valid JSON object:
 }`;
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { responseMimeType: "application/json", maxOutputTokens: 2048 }
+        generationConfig: { maxOutputTokens: 2048 }
       })
     });
 
     const data = await response.json();
+    if (data.error) throw new Error(data.error.message || 'Gemini API error');
     const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text ?? '{}';
-    const result = JSON.parse(rawText.replace(/```json|```/g, '').trim());
+    const clean = rawText.replace(/```json|```/g, '').trim();
+    const jsonMatch = clean.match(/\{[\s\S]*\}/);
+    const result = jsonMatch ? JSON.parse(jsonMatch[0]) : {};
 
     res.json({
       redFlags: result.redFlags ?? [],
@@ -59,6 +62,6 @@ Respond ONLY with a valid JSON object:
       score: result.score ?? 0,
     });
   } catch (err) {
-    res.status(500).json({ error: 'Failed to process request. Please try again.' });
+    res.status(500).json({ error: err.message || 'Failed to process request. Please try again.' });
   }
 }
