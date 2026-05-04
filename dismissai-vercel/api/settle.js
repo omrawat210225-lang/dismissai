@@ -25,30 +25,28 @@ Settle this argument:
 Side A: ${sideA}
 Side B: ${sideB}${context ? `\nContext: ${context}` : ""}
 
-Respond ONLY with a valid JSON object:
-{
-  "verdict": "1-2 sentence punchy verdict",
-  "reasoning": "2-4 sentences of detailed reasoning",
-  "winner": "sideA or sideB or both or neither",
-  "confidence": 0-100,
-  "severity": 1-10
-}`;
+Respond ONLY with a valid JSON object with no extra text:
+{"verdict":"1-2 sentence punchy verdict","reasoning":"2-4 sentences of detailed reasoning","winner":"sideA or sideB or both or neither","confidence":75,"severity":5}`;
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
+      },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { maxOutputTokens: 2048 }
+        model: 'llama3-8b-8192',
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 1024,
+        temperature: 0.7
       })
     });
 
     const data = await response.json();
-    if (data.error) throw new Error(data.error.message || 'Gemini API error');
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text ?? '{}';
-    const clean = text.replace(/```json|```/g, '').trim();
-    const jsonMatch = clean.match(/\{[\s\S]*\}/);
+    if (data.error) throw new Error(data.error.message || 'Groq API error');
+    const text = data.choices?.[0]?.message?.content ?? '{}';
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
     const result = jsonMatch ? JSON.parse(jsonMatch[0]) : {};
 
     res.json({
