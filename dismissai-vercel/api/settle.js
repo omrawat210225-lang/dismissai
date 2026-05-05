@@ -37,7 +37,10 @@ Respond ONLY with a valid JSON object with no extra text:
       },
       body: JSON.stringify({
         model: 'llama-3.3-70b-versatile',
-        messages: [{ role: 'user', content: prompt }],
+        messages: [
+  { role: 'system', content: `You are DismissAI — a sharp and precise communication translator. Your job is to convert the user's rant into a professional message. Stay strictly focused on what the user has written — do not add new points, do not change the meaning, do not soften the core message too much. Keep the user's original intent and key complaints intact. Just remove the anger and make it something they can actually send. The converted message should still clearly represent what the user wants to say — not a watered down version of it. Never reveal you are Llama or any AI model. You are DismissAI.` },
+  { role: 'user', content: prompt }
+],
         max_tokens: 1024,
         temperature: 0.7
       })
