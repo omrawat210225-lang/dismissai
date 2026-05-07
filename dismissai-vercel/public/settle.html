@@ -1,42 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Settle Any Argument — DismissAI</title>
-  <meta name="description" content="Settle arguments with unbiased AI. Enter both sides and get an honest verdict instantly." />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/style.css"/>
 </head>
 <body>
   <nav class="navbar">
-    <a href="/" class="logo">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect width="28" height="28" rx="7" fill="#0a0a0a"/>
-        <rect x="6" y="8" width="13" height="5" rx="2" fill="white"/>
-        <rect x="6" y="8" width="13" height="2" rx="2" fill="#3b82f6"/>
-        <line x1="18" y1="11" x2="24" y2="17" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="5" y1="17" x2="15" y2="17" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-        <line x1="5" y1="21" x2="11" y2="21" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-      </svg>
-      <span>Dismiss<span class="blue">AI</span></span>
-    </a>
-    <div class="nav-links">
-      <a href="/settle.html" class="active">Settle</a>
-      <a href="/redflag.html">Red Flags</a>
-      <a href="/rant.html">Rant</a>
-      <a href="/about.html">About</a>
-      <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+    <div class="nav-left">
+      <a href="/" class="back-btn">←</a>
+      <a href="/" class="logo">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <rect width="22" height="22" rx="5" fill="#0a0a0a"/>
+          <rect x="5" y="6" width="10" height="4" rx="1.5" fill="white"/>
+          <rect x="5" y="6" width="10" height="1.5" rx="1.5" fill="#3b82f6"/>
+          <line x1="14" y1="9" x2="19" y2="14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <line x1="4" y1="14" x2="12" y2="14" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="4" y1="17" x2="9" y2="17" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        </svg>
+        <div class="logo-divider"></div>
+        <span>Dismiss<span class="blue">AI</span></span>
+      </a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/settle.html" class="active">Settle</a>
+        <a href="/redflag.html">Red Flags</a>
+        <a href="/rant.html">Rant</a>
+        <a href="/about.html">About</a>
+      </div>
+      <button class="theme-btn" onclick="toggleTheme()">☀️</button>
     </div>
     <button class="hamburger" onclick="toggleMenu()">☰</button>
   </nav>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="/settle.html">⚖️ Settle</a>
-    <a href="/redflag.html">🚩 Red Flags</a>
-    <a href="/rant.html">😤 Rant</a>
-    <a href="/about.html">ℹ️ About</a>
+    <a href="/settle.html" onclick="toggleMenu()">Settle</a>
+    <a href="/redflag.html" onclick="toggleMenu()">Red Flags</a>
+    <a href="/rant.html" onclick="toggleMenu()">Rant</a>
+    <a href="/about.html" onclick="toggleMenu()">About</a>
   </div>
 
   <div class="page-main">
@@ -45,54 +50,52 @@
       <p id="pageSubtitle">Enter both sides of the dispute. Be as petty as you want. We will decide who is right.</p>
     </div>
 
-    <div id="formSection">
-      <!-- Category -->
-      <div class="form-group" style="margin-bottom:1.25rem">
-        <label>What kind of argument?</label>
-        <div class="pills" id="categoryPills">
-          <button class="pill" data-cat="Relationship" data-sub="Couples arguments settled with zero bias">💕 Relationship</button>
-          <button class="pill" data-cat="Money" data-sub="Who owes what? AI decides.">💰 Money</button>
-          <button class="pill" data-cat="Friendship" data-sub="Friend drama? We got you.">👥 Friendship</button>
-          <button class="pill" data-cat="Work" data-sub="Office conflicts resolved professionally">💼 Work</button>
-          <button class="pill" data-cat="Home & Chores" data-sub="Roommate wars end here">🏠 Home & Chores</button>
-          <button class="pill" data-cat="Random & Petty" data-sub="No argument too small for justice">😂 Random & Petty</button>
-        </div>
+    <!-- Category -->
+    <div class="form-group">
+      <div class="form-label">What kind of argument?</div>
+      <div class="pills" id="categoryPills">
+        <button class="pill" data-cat="Relationship" data-sub="Couples arguments settled with zero bias">💕 Relationship</button>
+        <button class="pill" data-cat="Money" data-sub="Who owes what? AI decides.">💰 Money</button>
+        <button class="pill" data-cat="Friendship" data-sub="Friend drama? We got you.">👥 Friendship</button>
+        <button class="pill" data-cat="Work" data-sub="Office conflicts resolved professionally">💼 Work</button>
+        <button class="pill" data-cat="Home & Chores" data-sub="Roommate wars end here">🏠 Home & Chores</button>
+        <button class="pill" data-cat="Random & Petty" data-sub="No argument too small for justice">😂 Random & Petty</button>
       </div>
-
-      <!-- Examples -->
-      <div class="form-group" style="margin-bottom:1.25rem">
-        <label>Try an example</label>
-        <div class="examples">
-          <button class="example-btn" onclick="fillExample('Who should pay on the first date? The person who asked for the date should pay — you invited them, you cover it.','It should always be split 50/50. Nobody owes anyone a free meal in 2025.')">Who pays on a first date?</button>
-          <button class="example-btn" onclick="fillExample('Pineapple on pizza is delicious. Sweet and savoury is a classic combo.','Pineapple does not belong on pizza. It makes it soggy and ruins every bite.')">Pineapple on pizza?</button>
-          <button class="example-btn" onclick="fillExample('If you see the message and have time, just reply. Playing games with response times is childish.','You do not have to reply instantly. People are busy and constant availability is not realistic.')">Texting back immediately?</button>
-        </div>
-      </div>
-
-      <!-- Side inputs -->
-      <div class="two-col" style="margin-bottom:1.25rem">
-        <div class="form-group">
-          <label class="blue">Side A (You)</label>
-          <textarea id="sideA" placeholder="e.g. I said we should leave at 5pm to beat traffic..."></textarea>
-        </div>
-        <div class="form-group">
-          <label class="red">Side B (Them)</label>
-          <textarea id="sideB" placeholder="e.g. They insisted on leaving at 6pm because they needed to finish a show..."></textarea>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-bottom:1.25rem">
-        <label>Context (Optional)</label>
-        <input type="text" id="context" placeholder="e.g. We are driving to a wedding and have been dating for 2 years." />
-      </div>
-
-      <div class="error-box" id="errorBox">
-        <div class="error-title">⚠️ Error processing request</div>
-        <div class="error-msg" id="errorMsg">An unexpected error occurred. Try again.</div>
-      </div>
-
-      <button class="submit-btn" id="submitBtn" onclick="submitSettle()">Settle This</button>
     </div>
+
+    <!-- Examples -->
+    <div class="form-group">
+      <div class="form-label">Try an example</div>
+      <div class="examples">
+        <button class="example-btn" onclick="fillExample('Who should pay on the first date? The person who asked for the date should pay — you invited them, you cover it.','It should always be split 50/50. Nobody owes anyone a free meal.')">Who pays on a first date?</button>
+        <button class="example-btn" onclick="fillExample('Pineapple on pizza is delicious. Sweet and savoury is a classic combo.','Pineapple does not belong on pizza. It makes it soggy and ruins every bite.')">Pineapple on pizza?</button>
+        <button class="example-btn" onclick="fillExample('If you see the message and have time, just reply. Playing games with response times is childish.','You do not have to reply instantly. People are busy and constant availability is not realistic.')">Texting back immediately?</button>
+      </div>
+    </div>
+
+    <!-- Sides -->
+    <div class="two-col">
+      <div class="form-group">
+        <div class="form-label label-a">Side A (You)</div>
+        <textarea id="sideA" placeholder="e.g. I said we should leave at 5pm to beat traffic..."></textarea>
+      </div>
+      <div class="form-group">
+        <div class="form-label label-b">Side B (Them)</div>
+        <textarea id="sideB" placeholder="e.g. They insisted on leaving at 6pm because they needed to finish a show..."></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">Context (Optional)</div>
+      <input type="text" id="context" placeholder="e.g. We are driving to a wedding and have been dating for 2 years."/>
+    </div>
+
+    <div class="error-box" id="errorBox">
+      <div class="error-title">⚠️ Error processing request</div>
+      <div class="error-msg" id="errorMsg">An unexpected error occurred. Try again.</div>
+    </div>
+
+    <button class="submit-btn btn-blue" id="submitBtn" onclick="submitSettle()">Settle This</button>
 
     <!-- Result -->
     <div class="result-section" id="resultSection">
@@ -108,31 +111,27 @@
       </div>
       <div class="verdict-text" id="verdictText"></div>
       <div class="reasoning-box">
-        <div class="reasoning-label">✅ Reasoning</div>
+        <div class="reasoning-label">Reasoning</div>
         <div class="reasoning-text" id="reasoningText"></div>
       </div>
       <div class="confidence-row">
+        <div class="conf-label">Confidence</div>
         <div class="conf-bar"><div class="conf-fill" id="confFill"></div></div>
         <div class="conf-pct" id="confPct"></div>
-        <div class="conf-label">Confidence</div>
       </div>
       <div class="share-section">
         <div class="share-label">Share your verdict 👇</div>
         <div class="share-btns">
           <button class="share-btn whatsapp" onclick="shareSettle('whatsapp')">💬 WhatsApp</button>
           <button class="share-btn twitter" onclick="shareSettle('twitter')">🐦 Twitter</button>
-          <button class="share-btn copy" id="copyVerdictBtn" onclick="shareSettle('copy')">📋 Copy Result</button>
+          <button class="share-btn copy" id="copyBtn" onclick="shareSettle('copy')">📋 Copy Result</button>
         </div>
       </div>
       <button class="try-another-btn" onclick="resetSettle()">🔄 Try Another One</button>
     </div>
   </div>
 
-  <footer class="footer">
-    <p>Built with receipts. No feelings spared.</p>
-    <p class="footer-sub">© 2025 DismissAI · Free forever</p>
-  </footer>
-
+  <footer class="footer">Built with receipts. No feelings spared.</footer>
   <script src="/app.js"></script>
   <script>
     let selectedCategory = '';
@@ -140,14 +139,15 @@
 
     document.querySelectorAll('#categoryPills .pill').forEach(btn => {
       btn.addEventListener('click', () => {
+        const isActive = btn.classList.contains('active');
         document.querySelectorAll('#categoryPills .pill').forEach(b => b.classList.remove('active'));
-        if (selectedCategory === btn.dataset.cat) {
-          selectedCategory = '';
-          document.getElementById('pageSubtitle').textContent = 'Enter both sides of the dispute. Be as petty as you want. We will decide who is right.';
-        } else {
+        if (!isActive) {
           btn.classList.add('active');
           selectedCategory = btn.dataset.cat;
           document.getElementById('pageSubtitle').textContent = btn.dataset.sub;
+        } else {
+          selectedCategory = '';
+          document.getElementById('pageSubtitle').textContent = 'Enter both sides of the dispute. Be as petty as you want. We will decide who is right.';
         }
       });
     });
@@ -163,38 +163,33 @@
       const context = document.getElementById('context').value.trim();
       const btn = document.getElementById('submitBtn');
       const errorBox = document.getElementById('errorBox');
-
       errorBox.classList.remove('show');
       if (!sideA || !sideB) {
         document.getElementById('errorMsg').textContent = 'Both sides need to present their argument first.';
         errorBox.classList.add('show');
         return;
       }
-
       btn.disabled = true;
       btn.innerHTML = 'Analyzing <span class="loading-dots"><span></span><span></span><span></span></span>';
       document.getElementById('resultSection').classList.remove('show');
-
       try {
         const res = await fetch('/api/settle', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sideA, sideB, context: context || null, category: selectedCategory || null })
+          method: 'POST', headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ sideA, sideB, context: context||null, category: selectedCategory||null })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Unknown error');
         lastResult = data;
-        showSettleResult(data);
+        showResult(data);
       } catch(err) {
-        document.getElementById('errorMsg').textContent = err.message || 'Something went wrong. Please try again.';
+        document.getElementById('errorMsg').textContent = err.message || 'Something went wrong.';
         errorBox.classList.add('show');
       }
-
       btn.disabled = false;
       btn.textContent = 'Settle This';
     }
 
-    function showSettleResult(data) {
+    function showResult(data) {
       const badge = document.getElementById('winnerBadge');
       badge.className = 'winner-badge';
       if (data.winner === 'sideA') { badge.classList.add('sideA'); badge.textContent = 'Side A Wins'; }
@@ -203,25 +198,20 @@
       else { badge.classList.add('tie'); badge.textContent = 'Both Are Wrong'; }
 
       const sev = Math.min(10, Math.max(1, data.severity || 5));
-      const pct = (sev / 10) * 100;
       const color = sev <= 3 ? '#22c55e' : sev <= 6 ? '#f59e0b' : sev <= 9 ? '#f97316' : '#ef4444';
       const label = sev <= 3 ? 'Minor Disagreement 😌' : sev <= 6 ? 'Heated Debate 😤' : sev <= 9 ? 'Serious Conflict 😠' : 'Full Blown War 💀';
-
       document.getElementById('sevScore').textContent = sev;
       document.getElementById('sevScore').style.color = color;
       document.getElementById('sevText').textContent = label;
       document.getElementById('sevText').style.color = color;
-
       setTimeout(() => {
         const bar = document.getElementById('sevBar');
-        bar.style.width = pct + '%';
+        bar.style.width = (sev/10*100) + '%';
         bar.style.backgroundColor = color;
-        bar.style.boxShadow = `0 0 12px ${color}88`;
       }, 100);
 
       document.getElementById('verdictText').textContent = data.verdict;
       document.getElementById('reasoningText').textContent = data.reasoning;
-
       const conf = data.confidence || 50;
       document.getElementById('confPct').textContent = conf + '%';
       setTimeout(() => document.getElementById('confFill').style.width = conf + '%', 100);
@@ -232,12 +222,11 @@
 
     function shareSettle(type) {
       if (!lastResult) return;
-      const winnerLabel = lastResult.winner === 'sideA' ? 'Side A Wins' : lastResult.winner === 'sideB' ? 'Side B Wins' : lastResult.winner === 'both' ? 'Both Are Right' : 'Both Are Wrong';
-      const text = `🏆 DismissAI settled our argument!\n\n${winnerLabel}: "${lastResult.verdict}"\n\n${lastResult.reasoning}\n\nConfidence: ${lastResult.confidence}%\n\nSettle yours at dismissai.vercel.app`;
-      const tweet = `🏆 DismissAI just settled our argument!\n\n${winnerLabel}: "${lastResult.verdict}"\n\n${lastResult.confidence}% confidence. #DismissAI`;
+      const winner = lastResult.winner === 'sideA' ? 'Side A Wins' : lastResult.winner === 'sideB' ? 'Side B Wins' : lastResult.winner === 'both' ? 'Both Are Right' : 'Both Are Wrong';
+      const text = `⚖️ DismissAI settled our argument!\n\n${winner}: "${lastResult.verdict}"\n\n${lastResult.reasoning}\n\nConfidence: ${lastResult.confidence}%\n\ndismissai.vercel.app`;
       if (type === 'whatsapp') shareOnWhatsApp(text);
-      else if (type === 'twitter') shareOnTwitter(tweet);
-      else copyToClipboard(text, document.getElementById('copyVerdictBtn'));
+      else if (type === 'twitter') shareOnTwitter(`⚖️ DismissAI just settled our argument!\n\n${winner}: "${lastResult.verdict}"\n\nConfidence: ${lastResult.confidence}% #DismissAI`);
+      else copyToClipboard(text, document.getElementById('copyBtn'));
     }
 
     function resetSettle() {
