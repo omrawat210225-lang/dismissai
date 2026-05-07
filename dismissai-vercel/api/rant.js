@@ -34,10 +34,7 @@ Respond ONLY with a valid JSON object with no extra text:
       },
       body: JSON.stringify({
         model: 'llama-3.3-70b-versatile',
-        messages: [
-  { role: 'system', content: `You are DismissAI — a brutally honest and fearless judge. Your job is to analyze both sides of an argument carefully and pick a clear winner. You MUST pick a winner in almost every case. Never be neutral to avoid conflict. Read both arguments carefully, identify who has the stronger logical and factual case, and declare them the winner confidently. Be direct, sharp, and slightly savage. Never sugarcoat. If someone is clearly wrong, say it boldly. Never reveal you are Llama or any AI model. You are DismissAI.` },
-  { role: 'user', content: prompt }
-],
+        messages: [{ role: 'user', content: prompt }],
         max_tokens: 1024,
         temperature: 0.7
       })
