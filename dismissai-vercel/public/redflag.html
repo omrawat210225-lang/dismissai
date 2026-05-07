@@ -1,42 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Red Flag Checker — DismissAI</title>
-  <meta name="description" content="Detect red flags in any situation. AI analyzes your situation and tells you if you should be worried." />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/style.css"/>
 </head>
 <body>
   <nav class="navbar">
-    <a href="/" class="logo">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect width="28" height="28" rx="7" fill="#0a0a0a"/>
-        <rect x="6" y="8" width="13" height="5" rx="2" fill="white"/>
-        <rect x="6" y="8" width="13" height="2" rx="2" fill="#3b82f6"/>
-        <line x1="18" y1="11" x2="24" y2="17" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="5" y1="17" x2="15" y2="17" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-        <line x1="5" y1="21" x2="11" y2="21" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-      </svg>
-      <span>Dismiss<span class="blue">AI</span></span>
-    </a>
-    <div class="nav-links">
-      <a href="/settle.html">Settle</a>
-      <a href="/redflag.html" class="active">Red Flags</a>
-      <a href="/rant.html">Rant</a>
-      <a href="/about.html">About</a>
-      <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+    <div class="nav-left">
+      <a href="/" class="back-btn">←</a>
+      <a href="/" class="logo">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <rect width="22" height="22" rx="5" fill="#0a0a0a"/>
+          <rect x="5" y="6" width="10" height="4" rx="1.5" fill="white"/>
+          <rect x="5" y="6" width="10" height="1.5" rx="1.5" fill="#3b82f6"/>
+          <line x1="14" y1="9" x2="19" y2="14" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <line x1="4" y1="14" x2="12" y2="14" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="4" y1="17" x2="9" y2="17" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        </svg>
+        <div class="logo-divider"></div>
+        <span>Dismiss<span class="blue">AI</span></span>
+      </a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/settle.html">Settle</a>
+        <a href="/redflag.html" class="active">Red Flags</a>
+        <a href="/rant.html">Rant</a>
+        <a href="/about.html">About</a>
+      </div>
+      <button class="theme-btn" onclick="toggleTheme()">☀️</button>
     </div>
     <button class="hamburger" onclick="toggleMenu()">☰</button>
   </nav>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="/settle.html">⚖️ Settle</a>
-    <a href="/redflag.html">🚩 Red Flags</a>
-    <a href="/rant.html">😤 Rant</a>
-    <a href="/about.html">ℹ️ About</a>
+    <a href="/settle.html" onclick="toggleMenu()">Settle</a>
+    <a href="/redflag.html" onclick="toggleMenu()">Red Flags</a>
+    <a href="/rant.html" onclick="toggleMenu()">Rant</a>
+    <a href="/about.html" onclick="toggleMenu()">About</a>
   </div>
 
   <div class="page-main">
@@ -45,73 +50,62 @@
       <p>Paste the texts, the situation, or their dating profile. We will tell you if you should run.</p>
     </div>
 
-    <div id="formSection">
-      <!-- Category -->
-      <div class="form-group" style="margin-bottom:1.25rem">
-        <label>Relationship type</label>
-        <div class="pills" id="categoryPills">
-          <button class="pill" data-cat="Dating">💕 Dating</button>
-          <button class="pill" data-cat="Friendship">👥 Friendship</button>
-          <button class="pill" data-cat="Workplace">💼 Workplace</button>
-          <button class="pill" data-cat="Family">👨‍👩‍👧 Family</button>
-        </div>
+    <!-- Category -->
+    <div class="form-group">
+      <div class="form-label">What kind of relationship?</div>
+      <div class="pills" id="categoryPills">
+        <button class="pill" data-cat="Dating">💕 Dating</button>
+        <button class="pill" data-cat="Friendship">👥 Friendship</button>
+        <button class="pill" data-cat="Workplace">💼 Workplace</button>
+        <button class="pill" data-cat="Family">👨‍👩‍👧 Family</button>
       </div>
-
-      <!-- Examples -->
-      <div class="form-group" style="margin-bottom:1.25rem">
-        <label>Try an example</label>
-        <div class="examples">
-          <button class="example-btn" onclick="fillExample('They texted me at 2am saying they miss me but ignore me all day and only reply hours later.')">Late night texts but ignores me</button>
-          <button class="example-btn" onclick="fillExample('My boss keeps asking me to work weekends without extra pay and gets upset when I say no.')">Boss overstepping boundaries</button>
-          <button class="example-btn" onclick="fillExample('They always make everything about themselves and never ask how I am doing or show any interest in my life.')">Never shows interest in me</button>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-bottom:1.25rem">
-        <label>The Situation / Texts</label>
-        <textarea id="situationText" placeholder="Paste what they said, what they did, or the entire confusing situation..." style="min-height:160px"></textarea>
-      </div>
-
-      <div class="form-group" style="margin-bottom:1.25rem">
-        <label>Context (Optional)</label>
-        <input type="text" id="context" placeholder="e.g. We met on Hinge 3 weeks ago, this is their response to me asking to meet up." />
-      </div>
-
-      <div class="error-box" id="errorBox">
-        <div class="error-title">⚠️ Error processing request</div>
-        <div class="error-msg" id="errorMsg">An unexpected error occurred. Try again.</div>
-      </div>
-
-      <button class="submit-btn" id="submitBtn" onclick="submitRedFlag()" style="background:#ef4444">Analyze Flags</button>
     </div>
+
+    <!-- Examples -->
+    <div class="form-group">
+      <div class="form-label">Try an example</div>
+      <div class="examples">
+        <button class="example-btn" onclick="fillExample('They texted me at 2am saying they miss me but ignore me all day and only reply hours later.')">They texted me at 2am saying they miss me but ignore...</button>
+        <button class="example-btn" onclick="fillExample('My boss keeps asking me to work weekends without extra pay and gets upset when I say no.')">My boss keeps asking me to work weekends without e...</button>
+        <button class="example-btn" onclick="fillExample('My partner checks my phone every night, gets upset when I talk to friends, and says I am too sensitive when I complain.')">My partner checks my phone every night, gets upset w...</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">The Situation / Texts</div>
+      <textarea id="situationText" placeholder="Paste what they said, what they did, or the entire confusing situation..." style="min-height:180px"></textarea>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">Context (Optional)</div>
+      <input type="text" id="context" placeholder="e.g. We met on Hinge 3 weeks ago, this is their response to me asking to meet up."/>
+    </div>
+
+    <div class="error-box" id="errorBox">
+      <div class="error-title">⚠️ Error processing request</div>
+      <div class="error-msg" id="errorMsg">An unexpected error occurred. Try again.</div>
+    </div>
+
+    <button class="submit-btn btn-red" id="submitBtn" onclick="submitRedFlag()">Analyze Flags</button>
 
     <!-- Result -->
     <div class="result-section" id="resultSection">
       <div class="result-top-bar" style="background:linear-gradient(90deg,#ef4444,#f97316)"></div>
-
-      <!-- Score -->
       <div class="rf-score-wrap">
         <div class="sev-label">Red Flag Score</div>
-        <div><span class="rf-score-num" id="rfScore" style="color:#ef4444"></span><span class="sev-of">/10</span></div>
+        <div><span class="rf-score-num" id="rfScore"></span><span class="sev-of">/10</span></div>
         <div class="rf-bar-wrap"><div class="rf-bar-fill" id="rfBar"></div></div>
         <div id="rfVerdictBadge" class="rf-verdict-badge"></div>
       </div>
-
-      <!-- Flags list -->
       <div class="rf-list" id="rfList"></div>
-
-      <!-- Summary -->
       <div class="summary-box">
-        <div class="summary-label">📋 Summary</div>
+        <div class="summary-label">Summary</div>
         <div class="summary-text" id="rfSummary"></div>
       </div>
-
-      <!-- Advice -->
       <div class="advice-box">
-        <div class="advice-label">💡 Advice</div>
+        <div class="advice-label">Advice</div>
         <div class="summary-text" id="rfAdvice"></div>
       </div>
-
       <div class="share-section">
         <div class="share-label">Share your verdict 👇</div>
         <div class="share-btns">
@@ -124,71 +118,69 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <p>Built with receipts. No feelings spared.</p>
-    <p class="footer-sub">© 2025 DismissAI · Free forever</p>
-  </footer>
-
+  <footer class="footer">Built with receipts. No feelings spared.</footer>
   <script src="/app.js"></script>
   <script>
     let selectedCategory = '';
     let lastResult = null;
+    const placeholders = {
+      Dating: 'Describe what they said or did, paste their texts...',
+      Friendship: 'Describe the situation with your friend...',
+      Workplace: 'Describe what your boss or coworker did...',
+      Family: 'Describe the family situation...'
+    };
 
     document.querySelectorAll('#categoryPills .pill').forEach(btn => {
       btn.addEventListener('click', () => {
+        const isActive = btn.classList.contains('active');
         document.querySelectorAll('#categoryPills .pill').forEach(b => b.classList.remove('active'));
-        if (selectedCategory === btn.dataset.cat) { selectedCategory = ''; }
-        else { btn.classList.add('active'); selectedCategory = btn.dataset.cat; }
+        if (!isActive) {
+          btn.classList.add('active');
+          selectedCategory = btn.dataset.cat;
+          document.getElementById('situationText').placeholder = placeholders[selectedCategory] || 'Paste what they said, what they did, or the entire confusing situation...';
+        } else {
+          selectedCategory = '';
+          document.getElementById('situationText').placeholder = 'Paste what they said, what they did, or the entire confusing situation...';
+        }
       });
     });
 
-    function fillExample(text) {
-      document.getElementById('situationText').value = text;
-    }
+    function fillExample(text) { document.getElementById('situationText').value = text; }
 
     async function submitRedFlag() {
       const text = document.getElementById('situationText').value.trim();
       const context = document.getElementById('context').value.trim();
       const btn = document.getElementById('submitBtn');
       const errorBox = document.getElementById('errorBox');
-
       errorBox.classList.remove('show');
       if (!text) {
         document.getElementById('errorMsg').textContent = 'Please describe the situation first.';
-        errorBox.classList.add('show');
-        return;
+        errorBox.classList.add('show'); return;
       }
-
       btn.disabled = true;
       btn.innerHTML = 'Analyzing <span class="loading-dots"><span></span><span></span><span></span></span>';
       document.getElementById('resultSection').classList.remove('show');
-
       try {
         const res = await fetch('/api/redflag', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, context: context || null, category: selectedCategory || null })
+          method: 'POST', headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ text, context: context||null, category: selectedCategory||null })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Unknown error');
         lastResult = data;
-        showRFResult(data);
+        showResult(data);
       } catch(err) {
-        document.getElementById('errorMsg').textContent = err.message || 'Something went wrong. Please try again.';
+        document.getElementById('errorMsg').textContent = err.message || 'Something went wrong.';
         errorBox.classList.add('show');
       }
-
       btn.disabled = false;
       btn.textContent = 'Analyze Flags';
     }
 
-    function showRFResult(data) {
+    function showResult(data) {
       const score = Math.min(10, Math.max(0, data.score || 0));
       document.getElementById('rfScore').textContent = score;
-
-      setTimeout(() => {
-        document.getElementById('rfBar').style.width = (score * 10) + '%';
-      }, 100);
+      setTimeout(() => { document.getElementById('rfBar').style.width = (score*10)+'%'; }, 100);
 
       const badge = document.getElementById('rfVerdictBadge');
       if (score <= 3) { badge.className = 'rf-verdict-badge rf-verdict-safe'; badge.textContent = score === 0 ? "You're fine ✅" : "Low risk 🟡"; }
@@ -201,18 +193,11 @@
         data.redFlags.forEach(flag => {
           const item = document.createElement('div');
           item.className = 'rf-item';
-          item.innerHTML = `
-            <span class="rf-emoji">🚩</span>
-            <div class="rf-item-content">
-              <div class="rf-item-title">${flag.flag}</div>
-              <div class="rf-item-exp">${flag.explanation}</div>
-            </div>
-            <span class="rf-sev-badge sev-${flag.severity}">${flag.severity}</span>
-          `;
+          item.innerHTML = `<span class="rf-emoji">🚩</span><div class="rf-item-content"><div class="rf-item-title">${flag.flag}</div><div class="rf-item-exp">${flag.explanation}</div></div><span class="rf-sev-badge sev-${flag.severity}">${flag.severity}</span>`;
           list.appendChild(item);
         });
       } else {
-        list.innerHTML = '<div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);padding:1rem;color:#22c55e;font-size:14px">✅ No major red flags detected. You seem to be doing fine.</div>';
+        list.innerHTML = '<div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);padding:1rem;color:#10b981;font-size:14px">✅ No major red flags detected. You seem to be doing fine.</div>';
       }
 
       document.getElementById('rfSummary').textContent = data.summary;
@@ -224,12 +209,11 @@
     function shareRF(type) {
       if (!lastResult) return;
       const score = lastResult.score || 0;
-      const riskLabel = score <= 3 ? "Low risk ✅" : score <= 6 ? "Proceed with caution ⚠️" : "Run immediately 🏃";
-      const flags = lastResult.redFlags?.map(f => `🚩 ${f.flag}`).join('\n') || 'No red flags found';
-      const text = `🚩 DismissAI Red Flag Report\n\nRisk: ${riskLabel} (${score}/10)\n\n${flags}\n\n${lastResult.summary}\n\nCheck yours at dismissai.vercel.app`;
-      const tweet = `🚩 DismissAI just analyzed my situation!\n\nRisk level: ${riskLabel} (${score}/10)\n\n${lastResult.summary}\n\n#DismissAI #RedFlags`;
+      const risk = score <= 3 ? "Low risk ✅" : score <= 6 ? "Proceed with caution ⚠️" : "Run immediately 🏃";
+      const flags = lastResult.redFlags?.map(f => `🚩 ${f.flag}`).join('\n') || '';
+      const text = `🚩 DismissAI Red Flag Report\n\nRisk: ${risk} (${score}/10)\n\n${flags}\n\n${lastResult.summary}\n\ndismissai.vercel.app`;
       if (type === 'whatsapp') shareOnWhatsApp(text);
-      else if (type === 'twitter') shareOnTwitter(tweet);
+      else if (type === 'twitter') shareOnTwitter(`🚩 DismissAI analyzed my situation!\n\nRisk: ${risk} (${score}/10)\n\n${lastResult.summary}\n\n#DismissAI`);
       else copyToClipboard(text, document.getElementById('copyBtn'));
     }
 
