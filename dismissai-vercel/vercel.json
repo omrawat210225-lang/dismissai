@@ -1,6 +1,8 @@
 {
+  "outputDirectory": "public",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/settle", "destination": "/api/settle.js" },
+    { "source": "/api/redflag", "destination": "/api/redflag.js" },
+    { "source": "/api/rant", "destination": "/api/rant.js" }
   ]
 }
