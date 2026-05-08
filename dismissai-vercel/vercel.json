@@ -1,8 +1,14 @@
 {
+  "version": 2,
   "outputDirectory": "public",
-  "rewrites": [
-    { "source": "/api/settle", "destination": "/api/settle.js" },
-    { "source": "/api/redflag", "destination": "/api/redflag.js" },
-    { "source": "/api/rant", "destination": "/api/rant.js" }
+  "builds": [
+    { "src": "public/**", "use": "@vercel/static" },
+    { "src": "api/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/settle", "dest": "/api/settle.js" },
+    { "src": "/api/redflag", "dest": "/api/redflag.js" },
+    { "src": "/api/rant", "dest": "/api/rant.js" },
+    { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
