@@ -25,8 +25,10 @@ Settle this argument:
 Side A: ${sideA}
 Side B: ${sideB}${context ? `\nContext: ${context}` : ""}
 
+IMPORTANT: You MUST always pick either "sideA" or "sideB" as the winner. NEVER output "both" or "neither". Even if both sides are partially wrong, pick the less wrong one and explain why decisively.
+
 Respond ONLY with a valid JSON object with no extra text:
-{"verdict":"1-2 sentence punchy verdict","reasoning":"2-4 sentences of detailed reasoning","winner":"sideA or sideB or both or neither","confidence":75,"severity":5}`;
+{"verdict":"1-2 sentence punchy verdict","reasoning":"2-4 sentences of detailed reasoning","winner":"sideA or sideB","confidence":75,"severity":5}`;
 
   try {
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
