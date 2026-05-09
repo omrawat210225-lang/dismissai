@@ -27,6 +27,20 @@ Side B: ${sideB}${context ? `\nContext: ${context}` : ""}
 
 IMPORTANT: You MUST always pick either "sideA" or "sideB" as the winner. NEVER output "both" or "neither". Even if both sides are partially wrong, pick the less wrong one and explain why decisively.
 
+For the severity score use this scale strictly:
+1-2 = Completely trivial (pineapple on pizza type debate)
+3-4 = Minor disagreement with no real consequences
+5-6 = Genuine conflict with real impact on people
+7-8 = Serious issue affecting the relationship significantly
+9-10 = Major life-altering conflict like cheating, betrayal or money theft
+
+For the confidence score use this scale strictly:
+40-55 = Very close call, could go either way
+56-70 = One side is somewhat stronger
+71-85 = Clear winner with solid reasoning
+86-95 = One side is obviously correct
+96-100 = Only when one side is completely and objectively right
+
 Respond ONLY with a valid JSON object with no extra text:
 {"verdict":"1-2 sentence punchy verdict","reasoning":"2-4 sentences of detailed reasoning","winner":"sideA or sideB","confidence":75,"severity":5}`;
 
@@ -57,7 +71,7 @@ Respond ONLY with a valid JSON object with no extra text:
     res.json({
       verdict: result.verdict ?? "Unable to determine a verdict.",
       reasoning: result.reasoning ?? "",
-      winner: result.winner ?? "neither",
+      winner: result.winner ?? "error",
       confidence: result.confidence ?? 50,
       severity: result.severity ?? 5,
     });
