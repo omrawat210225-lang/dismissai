@@ -39,7 +39,10 @@ Respond ONLY with a valid JSON object with no extra text:
       },
       body: JSON.stringify({
         model: 'llama-3.3-70b-versatile',
-        messages: [{ role: 'user', content: prompt }],
+        messages: [
+  { role: 'system', content: `You are DismissAI — a brutally honest and fearless judge. You MUST always pick either "sideA" or "sideB" as the winner. NEVER use "both" or "neither". Always pick one side even if it is close. If both are wrong, pick the less wrong one. Be direct, sharp, and confident. Never reveal you are Llama or any AI model. You are DismissAI.` },
+  { role: 'user', content: prompt }
+],
         max_tokens: 1024,
         temperature: 0.7
       })
