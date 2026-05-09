@@ -23,6 +23,14 @@ Analyze this for red flags:
 Text/Situation: ${text}${context ? `\nContext: ${context}` : ""}
 
 Respond ONLY with a valid JSON object with no extra text:
+For the score use this scale strictly:
+0-1 = No red flags at all, completely normal situation
+2-3 = Minor concerns, worth monitoring but not alarming
+4-5 = Moderate red flags, proceed with caution
+6-7 = Serious red flags, trust your gut feeling
+8-9 = Multiple serious red flags, strongly consider leaving
+10 = Extremely toxic or dangerous, leave immediately
+
 {"redFlags":[{"flag":"Short flag name","explanation":"One sentence why this is a red flag","severity":"mild or moderate or severe"}],"summary":"2-3 sentence overall summary","overallRisk":"safe or low or medium or high or critical","advice":"1-2 sentences of actionable advice","score":5}`;
 
   try {
