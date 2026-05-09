@@ -23,6 +23,13 @@ Convert this rant into a ${toneDesc} message${recipient ? ` for ${recipient}` : 
 Rant: ${rant}
 
 Respond ONLY with a valid JSON object with no extra text:
+For the rageLevel score use this scale strictly:
+1-20 = Mild frustration, slightly annoyed, calm language
+21-40 = Noticeably upset but still somewhat controlled
+41-60 = Genuinely angry with strong emotional language
+61-80 = Full rage mode, aggressive and very emotional
+81-100 = Explosive, threatening, completely unhinged language
+
 {"converted":"the rewritten message","keyPoints":["key point 1","key point 2"],"whatYouReallyMean":"1-2 sentences what the person actually wants","rageLevel":75}`;
 
   try {
